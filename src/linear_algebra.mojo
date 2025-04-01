@@ -1,8 +1,13 @@
-fn add(v: List[Float64], w: List[Float64]) -> List[Float64]:
+trait Addable(CollectionElement):
+    fn __add__(self, rhs: Self) -> Self:
+        ...
+
+
+fn add[T: Addable](v: List[T], w: List[T]) -> List[T]:
     var n = len(v)
     debug_assert(n == len(w))
 
-    var result = List[Float64]()
+    var result = List[T]()
     for i in range(n):
         result.append(v[i] + w[i])
     
