@@ -12,7 +12,7 @@ fn add[T: Addable](v: List[T], w: List[T]) -> List[T]:
     var n = len(v)
     debug_assert(n == len(w))
 
-    var result = List[T]()
+    var result = List[T](capacity=n)
     for i in range(n):
         result.append(v[i] + w[i])
     
@@ -23,7 +23,7 @@ fn sub[T: Subable](v: List[T], w: List[T]) -> List[T]:
     var n = len(v)
     debug_assert(n == len(w))
 
-    var result = List[T]()
+    var result = List[T](capacity=n)
     for i in range(n):
         result.append(v[i] - w[i])
 
