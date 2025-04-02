@@ -28,3 +28,9 @@ def test_simple_sub():
     var ys = List(4, 5, 6)
 
     assert_equal(List(1, 2, 3), sub(xs, ys))
+
+
+def test_add_multiple():
+    var xs = List(List(1, 2, 3), List(2, 3, 4), List(3, 4, 5), List(4, 5, 6))
+
+    assert_equal(List(10, 14, 18), add(xs))

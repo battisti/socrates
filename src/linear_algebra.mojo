@@ -6,6 +6,8 @@ trait Subable(CollectionElement):
     fn __sub__(self, rhs: Self) -> Self:
         ...
 
+trait Numeric(Addable, Subable, Defaultable):
+    ...
 
 
 fn add[T: Addable](v: List[T], w: List[T]) -> List[T]:
@@ -17,7 +19,21 @@ fn add[T: Addable](v: List[T], w: List[T]) -> List[T]:
         result.append(v[i] + w[i])
     
     return result
+
     
+fn add[T: Numeric](vs: List[List[T]]) -> List[T]:
+    var n = len(vs[0])
+    var v = len(vs)
+ 
+    result = List[T](capacity=v)
+    for i in range(n):
+        s = T() 
+        for j in range(v):
+            s = s + vs[j][i]
+        result.append(s)
+ 
+    return result
+
 
 fn sub[T: Subable](v: List[T], w: List[T]) -> List[T]:
     var n = len(v)
