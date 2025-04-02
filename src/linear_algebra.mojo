@@ -1,3 +1,5 @@
+from alogrithms import reduce
+
 trait Addable(CollectionElement):
     fn __add__(self, rhs: Self) -> Self:
         ...
@@ -20,7 +22,7 @@ fn add[T: Addable](v: List[T], w: List[T]) -> List[T]:
     
     return result
 
-    
+
 fn add[T: Numeric](vs: List[List[T]]) -> List[T]:
     var n = len(vs[0])
     var v = len(vs)
@@ -33,6 +35,10 @@ fn add[T: Numeric](vs: List[List[T]]) -> List[T]:
         result.append(s)
  
     return result
+
+
+fn add_reduce[T: Numeric](vs: List[List[T]]) -> List[T]:
+   return reduce[List[T]](add[T], vs) 
 
 
 fn sub[T: Subable](v: List[T], w: List[T]) -> List[T]:

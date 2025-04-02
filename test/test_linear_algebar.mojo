@@ -1,4 +1,4 @@
-from linear_algebra import add, sub
+from linear_algebra import add, sub, add_reduce
 from testing import assert_equal
 
 
@@ -34,3 +34,4 @@ def test_add_multiple():
     var xs = List(List(1, 2, 3), List(2, 3, 4), List(3, 4, 5), List(4, 5, 6))
 
     assert_equal(List(10, 14, 18), add(xs))
+    assert_equal(List(10, 14, 18), add_reduce(xs))

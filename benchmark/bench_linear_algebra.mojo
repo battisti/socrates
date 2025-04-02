@@ -1,5 +1,5 @@
 from benchmark import Bench, Bencher, BenchId
-from linear_algebra import add, sub
+from linear_algebra import add, sub, add_reduce
 
 
 
@@ -41,14 +41,55 @@ fn bench_sub[n: Int](mut b: Bencher) raises:
     _ = zs
 
 
+@parameter
+fn bench_add_multiple[n: Int](mut b: Bencher) raises:
+    var xs = List[Float64](capacity=n)
+    var ys = List[Float64](capacity=n)
+    var zs = List[Float64](capacity=n)
+    for i in range(n):
+        xs.append(i)
+        ys.append(i)
+        zs.append(i)
+ 
+    var rs = List[Float64]()
+ 
+    @always_inline
+    @parameter
+    fn call_fn() raises:
+        rs = add(List(xs, ys, zs))
+    
+    b.iter[call_fn]()
+    _ = rs
+ 
+
+@parameter
+fn bench_add_reduce[n: Int](mut b: Bencher) raises:
+    var xs = List[Float64](capacity=n)
+    var ys = List[Float64](capacity=n)
+    var zs = List[Float64](capacity=n)
+    for i in range(n):
+        xs.append(i)
+        ys.append(i)
+        zs.append(i)
+ 
+    var rs = List[Float64]()
+ 
+    @always_inline
+    @parameter
+    fn call_fn() raises:
+        rs = add_reduce(List(xs, ys, zs))
+    
+    b.iter[call_fn]()
+    _ = rs
+
 
 def main():
     var m = Bench()
 
-    m.bench_function[bench_add[1_000_000]](BenchId("bench_add_1M"))
-    m.bench_function[bench_add[9_999_999]](BenchId("bench_add_9M"))
+    m.bench_function[bench_add[10_000_000]](BenchId("bench_add_9M"))
+    m.bench_function[bench_sub[10_000_000]](BenchId("bench_add_9M"))
 
-    m.bench_function[bench_sub[1_000_000]](BenchId("bench_sub_1M"))
-    m.bench_function[bench_sub[9_999_999]](BenchId("bench_add_9M"))
+    m.bench_function[bench_add_multiple[10_000_000]](BenchId("bench_add_multiple"))
+    m.bench_function[bench_add_reduce[10_000_000]](BenchId("bench_add_reduce"))
 
     m.dump_report()
