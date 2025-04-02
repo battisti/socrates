@@ -12,3 +12,4 @@ Project to learn Mojo 🔥.
 - Look for a property-based testing library similar to QuickCheck.
 - Understand why `reduce` appears to be slower than a standard `for` loop (`add_reduce` vs. `add`).
   - Is there an easy way to inspect the number of memory allocations?
+- See if there is a more robust alternative to the Defaultable trait in the override of the add function for multiple vectors

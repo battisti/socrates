@@ -29,6 +29,7 @@ fn add[T: Numeric](vs: List[List[T]]) -> List[T]:
  
     result = List[T](capacity=v)
     for i in range(n):
+        # TODO: using Defaultable is not a good idea
         s = T() 
         for j in range(v):
             s = s + vs[j][i]
