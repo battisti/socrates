@@ -1,4 +1,4 @@
-from linear_algebra import add, sub, add_reduce, mul
+from linear_algebra import add, sub, add_reduce, mul, sum_of_squares
 from testing import assert_equal
 
 
@@ -44,3 +44,7 @@ def test_mul_simple():
     assert_equal(32, mul(v, w))
 
 
+def test_sum_of_squares():
+    var v = List(1, 2, 3)
+
+    assert_equal(14, sum_of_squares(v))

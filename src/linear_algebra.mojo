@@ -68,3 +68,6 @@ fn mul[T: Numeric](v: List[T], w: List[T]) -> T:
 
     return result
         
+
+fn sum_of_squares[T: Numeric](v: List[T]) -> T:
+    return mul(v, v)
