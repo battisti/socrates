@@ -8,7 +8,11 @@ trait Subable(CollectionElement):
     fn __sub__(self, rhs: Self) -> Self:
         ...
 
-trait Numeric(Addable, Subable, Defaultable):
+trait Mulable(CollectionElement):
+    fn __mul__(self, rhs: Self) -> Self:
+        ...
+
+trait Numeric(Addable, Subable, Defaultable, Mulable):
     ...
 
 
@@ -51,3 +55,16 @@ fn sub[T: Subable](v: List[T], w: List[T]) -> List[T]:
         result.append(v[i] - w[i])
 
     return result
+
+
+fn mul[T: Numeric](v: List[T], w: List[T]) -> T:
+    var n = len(v)
+    debug_assert(n == len(w))
+
+    # TODO: remove use of Defaultable 
+    var result = T()
+    for i in range(n):
+        result = result + (v[i] * w[i])
+
+    return result
+        

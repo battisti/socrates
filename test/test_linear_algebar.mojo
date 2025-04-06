@@ -1,4 +1,4 @@
-from linear_algebra import add, sub, add_reduce
+from linear_algebra import add, sub, add_reduce, mul
 from testing import assert_equal
 
 
@@ -35,3 +35,12 @@ def test_add_multiple():
 
     assert_equal(List(10, 14, 18), add(xs))
     assert_equal(List(10, 14, 18), add_reduce(xs))
+
+
+def test_mul_simple():
+    var v = List(1, 2, 3)
+    var w = List(4, 5, 6)
+
+    assert_equal(32, mul(v, w))
+
+
